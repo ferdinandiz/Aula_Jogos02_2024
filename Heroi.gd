@@ -39,6 +39,4 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_coletável_body_entered(body):
-	get_parent().get_node("Coletável").queue_free()
-	pass # Replace with function body.
+
