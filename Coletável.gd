@@ -13,6 +13,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.name == "Heroi":
+		$Sprite2D.visible = false
 		$"som".play(0)
 		pass
 	pass # Replace with function body.

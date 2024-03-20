@@ -1,10 +1,11 @@
-[gd_scene load_steps=53 format=3 uid="uid://bfuaajyf67ubp"]
+[gd_scene load_steps=67 format=3 uid="uid://bfuaajyf67ubp"]
 
 [ext_resource type="Texture2D" uid="uid://yjuhcg5226vr" path="res://sprite2D.png" id="1_qfrmp"]
 [ext_resource type="Script" path="res://Heroi.gd" id="2_py8cj"]
 [ext_resource type="Texture2D" uid="uid://6odtp8g1xwgd" path="res://Heroi/FinnSprite.png" id="3_n3rho"]
 [ext_resource type="Texture2D" uid="uid://d1krjhfru24pr" path="res://Inimigo/Walk_000.png" id="4_a8xla"]
 [ext_resource type="Texture2D" uid="uid://dvca8cmdep523" path="res://Inimigo/Walk_001.png" id="5_jmnra"]
+[ext_resource type="Script" path="res://Vilão.gd" id="5_nf6dr"]
 [ext_resource type="Texture2D" uid="uid://bcq3kacjp0kd4" path="res://Inimigo/Walk_002.png" id="6_6d3i2"]
 [ext_resource type="Texture2D" uid="uid://d0bsa1ix1yp76" path="res://Inimigo/Walk_003.png" id="7_y16vm"]
 [ext_resource type="Texture2D" uid="uid://bq7mt1bgm3my1" path="res://Inimigo/Walk_004.png" id="8_fo0pm"]
@@ -36,7 +37,17 @@
 [ext_resource type="Texture2D" uid="uid://cftg7wrulffy2" path="res://icon.svg" id="34_5vfi5"]
 [ext_resource type="Script" path="res://Coletável.gd" id="34_xuh4u"]
 [ext_resource type="Texture2D" uid="uid://dubudtxswvlqi" path="res://Terreno/Terrain (16 x 16).png" id="36_2qjxt"]
+[ext_resource type="Texture2D" uid="uid://d2ikb4m7vjfkl" path="res://Inimigo/Die_000.png" id="36_6moty"]
+[ext_resource type="Texture2D" uid="uid://rom3iimfk05q" path="res://Inimigo/Die_001.png" id="37_cvt7e"]
 [ext_resource type="AudioStream" uid="uid://cjjky3n7d3fiv" path="res://coleta.wav" id="37_fo00c"]
+[ext_resource type="Texture2D" uid="uid://fs43aogkvex" path="res://Inimigo/Die_002.png" id="38_mpn6t"]
+[ext_resource type="Texture2D" uid="uid://i3sxfjgtmn2u" path="res://Inimigo/Die_003.png" id="39_h0lrh"]
+[ext_resource type="Texture2D" uid="uid://btofi4jygkoj4" path="res://Inimigo/Die_004.png" id="40_2m5mc"]
+[ext_resource type="Texture2D" uid="uid://cl5obeytge71l" path="res://Inimigo/Die_005.png" id="41_nu024"]
+[ext_resource type="Texture2D" uid="uid://c03ocl7vq0v4p" path="res://Inimigo/Die_006.png" id="42_1i7a0"]
+[ext_resource type="Texture2D" uid="uid://c60y7wdqea3a1" path="res://Inimigo/Die_007.png" id="43_vpddv"]
+[ext_resource type="Texture2D" uid="uid://vthgfhdjfrau" path="res://Inimigo/Die_008.png" id="44_ekf7f"]
+[ext_resource type="Texture2D" uid="uid://b471n4ojffd11" path="res://Inimigo/Die_009.png" id="45_gk112"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nrjy6"]
 texture = ExtResource("36_2qjxt")
@@ -463,7 +474,69 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("36_6moty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_cvt7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_mpn6t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_h0lrh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_2m5mc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_nu024")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_1i7a0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_vpddv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_ekf7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_gk112")
+}],
+"loop": false,
+"name": &"morte",
+"speed": 10.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18bmr"]
+size = Vector2(12, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki6xk"]
+size = Vector2(7, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2au3b"]
+size = Vector2(298, 194)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oanxc"]
 size = Vector2(1188, 20)
@@ -521,18 +594,38 @@ limit_bottom = 195
 limit_smoothed = true
 
 [node name="Vilão" type="CharacterBody2D" parent="."]
-visible = false
+position = Vector2(524, 116)
 collision_layer = 2
-collision_mask = 7
+collision_mask = 5
+script = ExtResource("5_nf6dr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Vilão"]
+scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_18rnh")
-animation = &"idle"
+animation = &"morte"
 autoplay = "idle"
-frame_progress = 0.99719
+frame = 9
+frame_progress = 1.0
 speed_scale = 1.3
+flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vilão"]
+[node name="Colisor" type="CollisionShape2D" parent="Vilão"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_18bmr")
+
+[node name="HitBox" type="Area2D" parent="Vilão"]
+
+[node name="Colisor" type="CollisionShape2D" parent="Vilão/HitBox"]
+position = Vector2(-1, -6)
+shape = SubResource("RectangleShape2D_ki6xk")
+debug_color = Color(0.827451, 0, 0.952941, 0.419608)
+
+[node name="Visao" type="Area2D" parent="Vilão"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vilão/Visao"]
+position = Vector2(2, -40)
+shape = SubResource("RectangleShape2D_2au3b")
+debug_color = Color(0.396078, 0.611765, 0, 0.117647)
 
 [node name="Chão" type="StaticBody2D" parent="."]
 position = Vector2(0, -1)
@@ -557,5 +650,41 @@ shape = SubResource("RectangleShape2D_h7vjc")
 [node name="som" type="AudioStreamPlayer" parent="Coletável"]
 stream = ExtResource("37_fo00c")
 
+[node name="Coletável3" type="Area2D" parent="."]
+position = Vector2(-56, 160)
+script = ExtResource("34_xuh4u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Coletável3"]
+scale = Vector2(0.0602426, 0.0602426)
+texture = ExtResource("34_5vfi5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coletável3"]
+shape = SubResource("RectangleShape2D_h7vjc")
+
+[node name="som" type="AudioStreamPlayer" parent="Coletável3"]
+stream = ExtResource("37_fo00c")
+
+[node name="Coletável2" type="Area2D" parent="."]
+position = Vector2(408, 160)
+script = ExtResource("34_xuh4u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Coletável2"]
+scale = Vector2(0.0602426, 0.0602426)
+texture = ExtResource("34_5vfi5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coletável2"]
+shape = SubResource("RectangleShape2D_h7vjc")
+
+[node name="som" type="AudioStreamPlayer" parent="Coletável2"]
+stream = ExtResource("37_fo00c")
+
+[connection signal="animation_finished" from="Vilão/AnimatedSprite2D" to="Vilão" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Vilão/HitBox" to="Vilão" method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="Vilão/Visao" to="Vilão" method="_on_visao_body_entered"]
+[connection signal="body_exited" from="Vilão/Visao" to="Vilão" method="_on_visao_body_exited"]
 [connection signal="body_entered" from="Coletável" to="Coletável" method="_on_body_entered"]
 [connection signal="finished" from="Coletável/som" to="Coletável" method="_on_som_finished"]
+[connection signal="body_entered" from="Coletável3" to="Coletável3" method="_on_body_entered"]
+[connection signal="finished" from="Coletável3/som" to="Coletável3" method="_on_som_finished"]
+[connection signal="body_entered" from="Coletável2" to="Coletável2" method="_on_body_entered"]
+[connection signal="finished" from="Coletável2/som" to="Coletável2" method="_on_som_finished"]
